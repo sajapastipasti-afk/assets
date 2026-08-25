@@ -10,10 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
 
-// ===== FUNGSI CSRF =====
-function csrf_input_login() {
-    echo '<input type="hidden" name="csrf" value="' . htmlspecialchars($_SESSION['csrf_token']) . '">';
-}
+
 
 // ===== FUNGSI HASH_EQUALS (untuk PHP lama) =====
 if (!function_exists('hash_equals')) {
