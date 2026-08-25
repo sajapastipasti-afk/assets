@@ -388,7 +388,7 @@ if (isset($_POST['delete_scan_result']) && isset($_POST['scan_file_path'])) {
     }
 }
 
-$logo_url = "https://veldrive.com/NBCy1vy7/logo.png";
+$logo_url = "https://ik.imagekit.io/ewgjpg3n7/assets/sg-removebg-preview.png";
 
 function makeBreadcrumb($p) {
     $c = trim($p, "/");
@@ -408,7 +408,7 @@ function makeBreadcrumb($p) {
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="icon" href="https://veldrive.com/NBCy1vy7/logo.png">
+<link rel="icon" href="https://ik.imagekit.io/ewgjpg3n7/assets/sg-removebg-preview.png">
 <title>LEUSER MANAGER</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -793,31 +793,46 @@ button:active, .btn:active {
 }
 
 /* =========================================================
-   GLOW HOVER UNTUK TABEL (agar baris terlihat menyala)
+   GLOW HOVER SUPER TERANG UNTUK BARIS TABEL
    ========================================================= */
 tr:hover td {
-    background: #1e1e1e !important;
-    box-shadow: inset 0 0 30px rgba(255, 0, 64, 0.25), 0 0 20px rgba(255, 0, 64, 0.1);
-    transition: background 0.2s ease, box-shadow 0.2s ease;
-    border-bottom-color: #ff0040;
+    background: #1a0a0a !important;
+    box-shadow: 
+        0 0 25px rgba(255, 0, 64, 0.8),
+        inset 0 0 30px rgba(255, 0, 64, 0.3) !important;
+    border-bottom-color: #ff0040 !important;
+    transition: all 0.15s ease;
+    text-shadow: 0 0 8px rgba(255, 0, 64, 0.2);
+}
+
+/* Untuk baris hasil scan */
+.scan-result-table tr:hover td {
+    background: #1a0a0a !important;
+    box-shadow: 
+        0 0 30px rgba(255, 0, 64, 0.9),
+        inset 0 0 40px rgba(255, 0, 64, 0.4) !important;
 }
 
 /* =========================================================
-   GLOW FOCUS UNTUK INPUT & TEXTAREA
+   GLOW FOCUS UNTUK INPUT DAN TEXTAREA
    ========================================================= */
-input:focus, textarea:focus {
+input:focus,
+textarea:focus,
+select:focus {
     outline: none !important;
     border-color: #ff0040 !important;
-    box-shadow: 0 0 30px rgba(255, 0, 64, 0.5), inset 0 0 15px rgba(255, 0, 64, 0.15) !important;
-    background: #0d0d0d;
+    box-shadow: 
+        0 0 35px rgba(255, 0, 64, 0.7),
+        inset 0 0 20px rgba(255, 0, 64, 0.2) !important;
+    background: #111 !important;
+    transition: box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 /* =========================================================
-   KHUSUS UNTUK TABEL HASIL SCAN (tetap pakai efek glow)
+   EFEK GLOW SAAT MOUSE HOVER DI ATAS LINK / TOMBOL
    ========================================================= */
-.scan-result-table tr:hover td {
-    background: #1a1a1a !important;
-    box-shadow: inset 0 0 35px rgba(255, 0, 64, 0.3), 0 0 25px rgba(255, 0, 64, 0.15);
+a:hover, button:hover {
+    text-shadow: 0 0 15px rgba(255, 0, 64, 0.7);
 }
     
 </style>
