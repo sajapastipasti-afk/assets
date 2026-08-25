@@ -34,9 +34,7 @@ function process_login_custom() {
     if (isset($_POST['login_submit'])) {
         $tok = isset($_POST['csrf']) ? (string)$_POST['csrf'] : '';
         $sess = isset($_SESSION['csrf_token']) ? (string)$_SESSION['csrf_token'] : '';
-        if (!hash_equals($sess, $tok)) {
-            die('CSRF token invalid');
-        }
+
         
         $password = isset($_POST['password']) ? $_POST['password'] : '';
         
