@@ -441,219 +441,356 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <title>Pernah Waras — Safe File Manager</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
-/* --- STYLE ASLI (tidak diubah, hanya ditambah di bawah) --- */
-body{font-family:system-ui,Segoe UI,Arial; margin:18px; background:#f7fafc; color:#222}
-h1{margin:0 0 12px}
-.breadcrumb a{color:#1f6feb;text-decoration:none;margin-right:6px}
-.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
-.toolbar form{background:#fff;padding:8px;border-radius:8px;border:1px solid #e6e6e6}
-input[type=text],textarea,input[type=file]{padding:8px;border:1px solid #d1d5db;border-radius:6px}
-button.button{background:#0ea5e9;color:#fff;border:0;padding:8px 12px;border-radius:6px;cursor:pointer}
-table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden}
-th,td{padding:10px;text-align:left}
-th{background:#0ea5e9;color:#fff}
-tr:nth-child(even){background:#f3f4f6}
-.modal{display:none}
-#notification{display:none;padding:10px;background:#059669;color:#fff;border-radius:6px;position:fixed;top:18px;right:18px}
-pre.cmdout{background:#fff;padding:10px;border-radius:8px;border:1px solid #e6e6e6;max-height:280px;overflow:auto}
-.modal {
-    display:none;
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    background:#fff;
-    padding:20px;
-    border:1px solid #ccc;
-    border-radius:8px;
-    z-index:9999;
-    width:88%;
-    max-width:880px;
-    box-shadow:0 8px 30px rgba(0,0,0,0.3);
+/* --- GAYA UTAMA YANG LEBIH MODERN DAN NYAMAN --- */
+* {
+    box-sizing: border-box;
 }
-.modal h3{margin-top:0}
-.modal .modal-controls{display:flex;gap:8px;margin-top:10px;align-items:center}
-.overlay {
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.45);
-    z-index:9998;
+body {
+    font-family: 'Inter', 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+    margin: 20px;
+    background: #f8fafc;
+    color: #1e293b;
+    line-height: 1.6;
+    font-size: 16px;
+    transition: background 0.3s, color 0.3s;
 }
-.logout-link {
-    float: right;
-    color: #dc2626;
+h1 {
+    margin: 0 0 16px;
+    font-weight: 600;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+h1 .title-text {
+    flex: 1;
+}
+.breadcrumb {
+    background: #ffffff;
+    padding: 10px 16px;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    font-size: 0.95rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    border: 1px solid #e9edf2;
+}
+.breadcrumb a {
+    color: #2563eb;
     text-decoration: none;
-    font-size: 14px;
-    margin-top: 5px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: background 0.2s;
 }
-.logout-link:hover {
+.breadcrumb a:hover {
+    background: #eef2ff;
+}
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.toolbar form {
+    background: #ffffff;
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.toolbar form:hover {
+    border-color: #b9c7da;
+}
+input[type="text"],
+input[type="file"],
+textarea,
+select {
+    padding: 8px 12px;
+    border: 1px solid #d1d9e6;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: #ffffff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+textarea {
+    min-width: 160px;
+    resize: vertical;
+}
+button.button {
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    font-family: inherit;
+}
+button.button:hover {
+    background: #1d4ed8;
+}
+button.button:active {
+    transform: scale(0.96);
+}
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border: 1px solid #e9edf2;
+}
+th {
+    background: #f1f5f9;
+    color: #1e293b;
+    font-weight: 600;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid #dce2ec;
+}
+td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #edf2f7;
+    vertical-align: middle;
+}
+tr:last-child td {
+    border-bottom: none;
+}
+tr:hover td {
+    background: #f8fafc;
+}
+td a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+}
+td a:hover {
     text-decoration: underline;
 }
-
-/* ===== TAMBAHAN CSS UNTUK DARK MODE & NEON GLOWING ===== */
-/* Tombol toggle */
+#notification {
+    display: none;
+    padding: 12px 20px;
+    background: #059669;
+    color: #ffffff;
+    border-radius: 10px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-weight: 500;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    z-index: 999;
+}
+pre.cmdout {
+    background: #ffffff;
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    max-height: 300px;
+    overflow: auto;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    padding: 24px 28px;
+    border-radius: 16px;
+    z-index: 9999;
+    width: 92%;
+    max-width: 860px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    border: 1px solid rgba(0,0,0,0.08);
+}
+.modal h3 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+.modal .modal-controls {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15,23,42,0.5);
+    backdrop-filter: blur(2px);
+    z-index: 9998;
+}
+.logout-link {
+    color: #dc2626;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: #fee2e2;
+    transition: background 0.2s, color 0.2s;
+}
+.logout-link:hover {
+    background: #fecaca;
+    color: #b91c1c;
+}
 #darkModeToggle {
-    background: transparent;
+    background: #e2e8f0;
     border: none;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     cursor: pointer;
-    margin-left: 10px;
-    vertical-align: middle;
-    color: #333;
-    transition: all 0.3s ease;
+    padding: 4px 12px;
+    border-radius: 40px;
+    transition: background 0.3s, transform 0.2s;
+    line-height: 1;
 }
 #darkModeToggle:hover {
-    transform: scale(1.1);
+    background: #cbd5e1;
+    transform: scale(1.05);
 }
 
-/* Dark mode base */
+/* --- DARK MODE DENGAN NEON GLOW YANG LEBIH HALUS --- */
 body.dark-mode {
-    background-color: #0a0a0a !important;
-    color: #e0e0e0 !important;
+    background: #0b0e14;
+    color: #e2e8f0;
 }
-
-/* Neon glow pada teks utama */
-body.dark-mode h1,
-body.dark-mode .breadcrumb a,
-body.dark-mode .logout-link {
-    color: #00ffff;
-    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff;
-    transition: text-shadow 0.3s;
+body.dark-mode .breadcrumb {
+    background: #1a202c;
+    border-color: #2d3748;
 }
-body.dark-mode .breadcrumb a:hover,
-body.dark-mode .logout-link:hover {
-    color: #ff00ff;
-    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+body.dark-mode .breadcrumb a {
+    color: #60a5fa;
 }
-
-/* Tabel dengan border & bayangan neon */
-body.dark-mode table {
-    background: #1a1a1a;
-    border: 1px solid #00ffff;
-    box-shadow: 0 0 20px #00ffff, inset 0 0 10px #00ffff;
+body.dark-mode .breadcrumb a:hover {
+    background: #1e293b;
 }
-body.dark-mode th {
-    background: #003366;
-    color: #00ffff;
-    text-shadow: 0 0 8px #00ffff;
-}
-body.dark-mode tr:nth-child(even) {
-    background: #1f1f1f;
-}
-/* Efek glowing pada baris saat hover (cursor berada di baris) */
-body.dark-mode tr:hover td {
-    background: #003333 !important;
-    box-shadow: inset 0 0 30px #00ffff, 0 0 15px #00ffff;
-    color: #ffffff;
-    text-shadow: 0 0 10px #00ffff;
-    transition: all 0.2s ease;
-}
-body.dark-mode td,
-body.dark-mode th {
-    border-bottom: 1px solid #00ffff;
-}
-
-/* Toolbar, input, textarea, select */
 body.dark-mode .toolbar form {
-    background: #1a1a1a;
-    border-color: #00ffff;
-    box-shadow: 0 0 10px rgba(0,255,255,0.3);
+    background: #1a202c;
+    border-color: #2d3748;
 }
-body.dark-mode input[type=text],
+body.dark-mode input[type="text"],
 body.dark-mode textarea,
-body.dark-mode input[type=file],
-body.dark-mode select {
-    background: #2a2a2a;
-    color: #e0e0e0;
-    border-color: #00ffff;
+body.dark-mode select,
+body.dark-mode input[type="file"] {
+    background: #1e293b;
+    color: #e2e8f0;
+    border-color: #334155;
 }
-body.dark-mode input[type=text]:focus,
-body.dark-mode textarea:focus {
-    box-shadow: 0 0 15px #00ffff;
-    border-color: #00ffff;
+body.dark-mode input[type="text"]:focus,
+body.dark-mode textarea:focus,
+body.dark-mode select:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 3px rgba(96,165,250,0.2);
 }
-
-/* Tombol */
-body.dark-mode .button {
-    background: #003366;
-    color: #00ffff;
-    box-shadow: 0 0 15px #00ffff;
+body.dark-mode table {
+    background: #1a202c;
+    border-color: #2d3748;
 }
-body.dark-mode .button:hover {
-    background: #0055aa;
-    box-shadow: 0 0 30px #00ffff;
+body.dark-mode th {
+    background: #1e293b;
+    color: #94a3b8;
+    border-bottom-color: #334155;
 }
-
-/* Modal */
+body.dark-mode td {
+    border-bottom-color: #2d3748;
+}
+body.dark-mode tr:hover td {
+    background: #1e293b !important;
+    box-shadow: inset 0 0 20px rgba(96,165,250,0.08), 0 0 12px rgba(96,165,250,0.2);
+}
+body.dark-mode td a {
+    color: #60a5fa;
+}
+body.dark-mode td a:hover {
+    color: #93bbfc;
+}
+body.dark-mode #notification {
+    background: #065f46;
+    box-shadow: 0 0 20px rgba(6,95,70,0.4);
+}
+body.dark-mode pre.cmdout {
+    background: #1a202c;
+    border-color: #2d3748;
+    color: #a5f3fc;
+}
 body.dark-mode .modal {
-    background: #1a1a1a;
-    border: 2px solid #00ffff;
-    box-shadow: 0 0 40px #00ffff;
+    background: #1a202c;
+    border-color: #2d3748;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
 }
 body.dark-mode .modal h3 {
-    color: #00ffff;
-    text-shadow: 0 0 10px #00ffff;
+    color: #e2e8f0;
 }
-body.dark-mode .modal .button {
-    background: #003366;
-    color: #00ffff;
-}
-body.dark-mode .modal .button[style*="background:#6b7280"] {
-    background: #444 !important;
-    color: #ccc;
-}
-body.dark-mode .modal .button[style*="background:#dc2626"] {
-    background: #660000 !important;
-    color: #ff6666;
-    box-shadow: 0 0 15px #ff0000;
-}
-
-/* Command output */
-body.dark-mode pre.cmdout {
-    background: #1a1a1a;
-    border-color: #00ff00;
-    color: #00ff00;
-    text-shadow: 0 0 8px #00ff00;
-    box-shadow: 0 0 20px #00ff00;
-}
-
-/* Notifikasi */
-body.dark-mode #notification {
-    background: #003300;
-    color: #00ff00;
-    box-shadow: 0 0 20px #00ff00;
-}
-
-/* Logout link */
 body.dark-mode .logout-link {
-    color: #ff00ff;
+    background: #451a1a;
+    color: #fca5a5;
 }
 body.dark-mode .logout-link:hover {
-    color: #ff00ff;
-    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+    background: #5f1a1a;
+    color: #fecaca;
 }
-
-/* Tombol toggle saat dark */
 body.dark-mode #darkModeToggle {
-    color: #00ffff;
-    text-shadow: 0 0 15px #00ffff;
+    background: #334155;
+    color: #facc15;
 }
-
-/* About Me */
+body.dark-mode #darkModeToggle:hover {
+    background: #475569;
+}
+/* Neon tambahan untuk judul dan link di dark */
+body.dark-mode h1 .title-text {
+    color: #60a5fa;
+    text-shadow: 0 0 10px rgba(96,165,250,0.3);
+}
 body.dark-mode .about-me a {
-    color: #00ffff !important;
-    text-shadow: 0 0 10px #00ffff;
+    color: #60a5fa !important;
 }
 body.dark-mode .about-me a:hover {
-    color: #ff00ff !important;
-    text-shadow: 0 0 20px #ff00ff;
+    color: #93bbfc !important;
+}
+
+/* Tombol button di dark */
+body.dark-mode button.button {
+    background: #2563eb;
+    color: #fff;
+}
+body.dark-mode button.button:hover {
+    background: #3b82f6;
 }
 </style>
 </head>
 <body>
 <h1>
-    Pernah Waras — Safe File Manager
+    <span class="title-text">📁 Pernah Waras — Safe File Manager</span>
     <button id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
     <a href="?logout" class="logout-link">Logout</a>
 </h1>
@@ -662,32 +799,32 @@ body.dark-mode .about-me a:hover {
 
 <div class="toolbar">
 <form method="get">
-    <button type="submit" class="button">Home</button>
+    <button type="submit" class="button">🏠 Home</button>
 </form>
 
 <form method="post">
     <?php csrf_input(); ?>
-    <input type="text" name="folder_name" placeholder="New Folder Name">
-    <button type="submit" name="new_folder" class="button">Create Folder</button>
+    <input type="text" name="folder_name" placeholder="Folder name">
+    <button type="submit" name="new_folder" class="button">📁 New Folder</button>
 </form>
 
 <form method="post">
     <?php csrf_input(); ?>
-    <input type="text" name="file_name" placeholder="New File Name">
-    <textarea name="file_content" rows="2" placeholder="Optional initial content"></textarea>
-    <button type="submit" name="new_file" class="button">Create File</button>
+    <input type="text" name="file_name" placeholder="File name">
+    <textarea name="file_content" rows="2" placeholder="Initial content (optional)"></textarea>
+    <button type="submit" name="new_file" class="button">📄 New File</button>
 </form>
 
 <form method="post" enctype="multipart/form-data">
     <?php csrf_input(); ?>
     <input type="file" name="uploaded_file" required>
-    <button type="submit" name="upload_file" class="button">Upload</button>
+    <button type="submit" name="upload_file" class="button">⬆ Upload</button>
 </form>
 
 <form method="post">
     <?php csrf_input(); ?>
-    <input type="text" name="cmd" placeholder="Enter command">
-    <button type="submit" class="button">Execute</button>
+    <input type="text" name="cmd" placeholder="Command">
+    <button type="submit" class="button">⚡ Execute</button>
 </form>
 </div>
 
@@ -707,10 +844,10 @@ body.dark-mode .about-me a:hover {
     <td><?php echo htmlspecialchars($f['size']); ?></td>
     <td><?php echo htmlspecialchars($f['permission']); ?></td>
     <td>
-        <a href="#" onclick="openEditModalHex('<?php echo urlencode(strToHex($full)); ?>'); return false;">Edit</a> |
-        <a href="#" onclick="openRenameModal('<?php echo urlencode(strToHex($full)); ?>'); return false;">Rename</a> |
-        <a href="#" onclick="openChmodModal('<?php echo urlencode(strToHex($full)); ?>'); return false;">Chmod</a> |
-        <a href="#" onclick="openDeleteModal('<?php echo urlencode(strToHex($full)); ?>'); return false;">Delete</a>
+        <a href="#" onclick="openEditModalHex('<?php echo urlencode(strToHex($full)); ?>'); return false;">✎ Edit</a> |
+        <a href="#" onclick="openRenameModal('<?php echo urlencode(strToHex($full)); ?>'); return false;">✏ Rename</a> |
+        <a href="#" onclick="openChmodModal('<?php echo urlencode(strToHex($full)); ?>'); return false;">🔒 Chmod</a> |
+        <a href="#" onclick="openDeleteModal('<?php echo urlencode(strToHex($full)); ?>'); return false;">🗑 Delete</a>
     </td>
 </tr>
 <?php endforeach; ?>
@@ -721,7 +858,7 @@ body.dark-mode .about-me a:hover {
 
 <!-- EDIT MODAL -->
 <div id="editModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="editTitle">
-  <h3 id="editTitle">Edit File: <span id="modal-filename"></span></h3>
+  <h3 id="editTitle">✎ Edit File: <span id="modal-filename"></span></h3>
   <form method="post" id="editForm">
     <?php csrf_input(); ?>
     <input type="hidden" name="edit_file" id="modal-filepath">
@@ -730,24 +867,24 @@ body.dark-mode .about-me a:hover {
       <option value="">Text</option>
       <option value="b64">Base64</option>
     </select>
-    <div style="margin-top:10px;">
-      <textarea name="content" id="modal-textarea" rows="18" style="width:100%;font-family:monospace;"></textarea>
+    <div style="margin-top:12px;">
+      <textarea name="content" id="modal-textarea" rows="18" style="width:100%;font-family:monospace;font-size:0.9rem;"></textarea>
     </div>
     <div class="modal-controls">
-      <button type="submit" class="button">Save</button>
+      <button type="submit" class="button">💾 Save</button>
       <button type="button" onclick="closeEditModal()" class="button" style="background:#6b7280;">Cancel</button>
-      <span style="margin-left:auto;font-size:0.9em;color:#555">Tip: gunakan Base64 jika file biner</span>
+      <span style="margin-left:auto;font-size:0.85rem;color:#64748b;">Tip: gunakan Base64 untuk file biner</span>
     </div>
   </form>
 </div>
 
 <!-- RENAME -->
 <div id="renameModal" class="modal">
-  <h3>Rename</h3>
+  <h3>✏ Rename</h3>
   <form method="post">
     <?php csrf_input(); ?>
     <input type="hidden" name="rename_path" id="rename-path">
-    <input type="text" name="new_name" id="rename-input" placeholder="New Name">
+    <input type="text" name="new_name" id="rename-input" placeholder="New name" style="width:100%;">
     <div class="modal-controls">
       <button type="submit" class="button">Rename</button>
       <button type="button" onclick="closeRenameModal()" class="button" style="background:#6b7280;">Cancel</button>
@@ -757,11 +894,11 @@ body.dark-mode .about-me a:hover {
 
 <!-- CHMOD -->
 <div id="chmodModal" class="modal">
-  <h3>Change Permission</h3>
+  <h3>🔒 Change Permission</h3>
   <form method="post">
     <?php csrf_input(); ?>
     <input type="hidden" name="chmod_path" id="chmod-path">
-    <input type="text" name="chmod_value" id="chmod-input" placeholder="e.g., 0755">
+    <input type="text" name="chmod_value" id="chmod-input" placeholder="e.g., 0755" style="width:100%;">
     <div class="modal-controls">
       <button type="submit" class="button">Change</button>
       <button type="button" onclick="closeChmodModal()" class="button" style="background:#6b7280;">Cancel</button>
@@ -771,12 +908,13 @@ body.dark-mode .about-me a:hover {
 
 <!-- DELETE -->
 <div id="deleteModal" class="modal">
-  <h3>Delete</h3>
+  <h3>🗑 Delete</h3>
   <form method="post">
     <?php csrf_input(); ?>
     <input type="hidden" name="delete_path" id="delete-path">
+    <p style="margin:8px 0 16px;">Are you sure you want to delete this item?</p>
     <div class="modal-controls">
-      <button type="submit" class="button" style="background:#dc2626;">Delete</button>
+      <button type="submit" class="button" style="background:#dc2626;">Yes, Delete</button>
       <button type="button" onclick="closeDeleteModal()" class="button" style="background:#6b7280;">Cancel</button>
     </div>
   </form>
@@ -786,12 +924,12 @@ body.dark-mode .about-me a:hover {
 function showNotification(msg){
     var n=document.getElementById('notification');
     if(!n){
-        n=document.createElement('div'); n.id='notification'; n.style.cssText='display:block;padding:10px;background:#059669;color:#fff;border-radius:6px;position:fixed;top:18px;right:18px;';
+        n=document.createElement('div'); n.id='notification'; n.style.cssText='display:block;padding:12px 20px;background:#059669;color:#fff;border-radius:10px;position:fixed;top:20px;right:20px;font-weight:500;box-shadow:0 8px 25px rgba(0,0,0,0.12);z-index:999;';
         document.body.appendChild(n);
     }
     n.innerText=msg;
     n.style.display='block';
-    setTimeout(function(){ n.style.display='none'; },3000);
+    setTimeout(function(){ n.style.display='none'; },3500);
 }
 <?php if ($msg) echo "showNotification(".json_encode($msg).");"; ?>
 
@@ -888,12 +1026,11 @@ document.addEventListener('keydown', function(e){
     if (e.key === 'Escape') closeAllModals();
 });
 
-// ===== TAMBAHAN JAVASCRIPT UNTUK TOGGLE DARK/LIGHT MODE =====
+// ===== TOGGLE DARK MODE =====
 (function() {
     const toggleBtn = document.getElementById('darkModeToggle');
     if (!toggleBtn) return;
 
-    // Cek preferensi yang tersimpan
     if (localStorage.getItem('darkMode') === 'enabled') {
         document.body.classList.add('dark-mode');
         toggleBtn.textContent = '☀️';
@@ -910,12 +1047,12 @@ document.addEventListener('keydown', function(e){
 </body>
 </html>
 <!-- ABOUT ME MINIMALIS -->
-<div class="about-me" style="margin-top:40px;text-align:center;font-size:13px;">
-    <p style="margin:0 0 4px;color:#111;font-weight:bold;">About Me</p>
+<div class="about-me" style="margin-top:40px;text-align:center;font-size:0.9rem;opacity:0.8;">
+    <p style="margin:0 0 4px;font-weight:500;">About Me</p>
     <a href="https://tinyurl.com/23fryr64" target="_blank" 
-       style="color:#0ea5e9;text-decoration:none;font-weight:bold;transition:color 0.2s;"
-       onmouseover="this.style.color='#0590c1';" 
-       onmouseout="this.style.color='#0ea5e9';">
-        Contact Me on Telegram
+       style="color:#2563eb;text-decoration:none;font-weight:500;transition:color 0.2s;"
+       onmouseover="this.style.color='#1d4ed8';" 
+       onmouseout="this.style.color='#2563eb';">
+        📱 Contact Me on Telegram
     </a>
 </div>
