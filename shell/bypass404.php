@@ -1,19 +1,24 @@
- 
 <?php
 $ADMIN_HASH = '$2y$10$W3CtskR6jj2FmLsW7kc24uud2en9sqiN4xinFasRPtNxy.E940/Jm'; // default: "password"
 
+// ===== ATUR COOKIE SESSION UNTUK SELURUH PATH =====
+session_set_cookie_params([
+    'path'     => '/',          // Berlaku untuk semua direktori
+    'httponly' => true,
+    'samesite' => 'Lax'
+]);
 
 // ===== INISIALISASI SESSION =====
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// ===== CSRF TOKEN =====
+// ===== CSRF TOKEN (tetap dibuat, tapi pengecekan dinonaktifkan) =====
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
-// ===== FUNGSI CSRF =====
+// ===== FUNGSI CSRF (tetap dipakai untuk hidden input) =====
 function csrf_input_login() {
     echo '<input type="hidden" name="csrf" value="' . htmlspecialchars($_SESSION['csrf_token']) . '">';
 }
@@ -33,23 +38,24 @@ if (!function_exists('hash_equals')) {
     }
 }
 
-// ===== PROSES LOGIN =====
+// ===== PROSES LOGIN (CSRF DINONAKTIFKAN) =====
 function process_login_custom() {
     global $ADMIN_HASH;
     
     if (isset($_POST['login_submit'])) {
-        $tok = isset($_POST['csrf']) ? (string)$_POST['csrf'] : '';
-        $sess = isset($_SESSION['csrf_token']) ? (string)$_SESSION['csrf_token'] : '';
-        if (!hash_equals($sess, $tok)) {
-            die('CSRF token invalid');
-        }
+        // ===== CSRF CHECK DI-NONAKTIFKAN =====
+        // $tok = isset($_POST['csrf']) ? (string)$_POST['csrf'] : '';
+        // $sess = isset($_SESSION['csrf_token']) ? (string)$_SESSION['csrf_token'] : '';
+        // if (!hash_equals($sess, $tok)) {
+        //     die('CSRF token invalid');
+        // }
         
         $password = isset($_POST['password']) ? $_POST['password'] : '';
         
         if (password_verify($password, $ADMIN_HASH)) {
             $_SESSION['logged_in'] = true;
             $_SESSION['login_time'] = time();
-            session_regenerate_id(true);
+            // session_regenerate_id(true);  // DIHAPUS agar session tetap sama
             return true;
         } else {
             $_SESSION['login_error'] = 'Password salah!';
@@ -60,17 +66,17 @@ function process_login_custom() {
     return false;
 }
 
-// ===== CEK LOGIN =====
+// ===== CEK LOGIN (AUTO-LOGOUT DINONAKTIFKAN) =====
 function is_logged_in_custom() {
     if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
         return false;
     }
     
-    // Auto logout setelah 30 menit (opsional, bisa dihapus)
-    if (isset($_SESSION['login_time']) && (time() - $_SESSION['login_time'] > 1800)) {
-        logout_custom();
-        return false;
-    }
+    // Auto logout setelah 30 menit - DI-NONAKTIFKAN
+    // if (isset($_SESSION['login_time']) && (time() - $_SESSION['login_time'] > 1800)) {
+    //     logout_custom();
+    //     return false;
+    // }
     
     return true;
 }
@@ -381,4 +387,4 @@ $items = scandir($current_path);
         </table>
     <?php endif; ?>
 </body>
-</htm
+</html>
