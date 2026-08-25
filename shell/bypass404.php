@@ -8,9 +8,15 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// ===== CSRF TOKEN =====
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 
-
-
+// ===== FUNGSI CSRF =====
+function csrf_input_login() {
+    echo '<input type="hidden" name="csrf" value="' . htmlspecialchars($_SESSION['csrf_token']) . '">';
+}
 
 // ===== FUNGSI HASH_EQUALS (untuk PHP lama) =====
 if (!function_exists('hash_equals')) {
@@ -34,7 +40,9 @@ function process_login_custom() {
     if (isset($_POST['login_submit'])) {
         $tok = isset($_POST['csrf']) ? (string)$_POST['csrf'] : '';
         $sess = isset($_SESSION['csrf_token']) ? (string)$_SESSION['csrf_token'] : '';
-
+        if (!hash_equals($sess, $tok)) {
+            die('CSRF token invalid');
+        }
         
         $password = isset($_POST['password']) ? $_POST['password'] : '';
         
