@@ -441,6 +441,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <title>Pernah Waras — Safe File Manager</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
+/* --- STYLE ASLI (tidak diubah, hanya ditambah di bawah) --- */
 body{font-family:system-ui,Segoe UI,Arial; margin:18px; background:#f7fafc; color:#222}
 h1{margin:0 0 12px}
 .breadcrumb a{color:#1f6feb;text-decoration:none;margin-right:6px}
@@ -489,10 +490,173 @@ pre.cmdout{background:#fff;padding:10px;border-radius:8px;border:1px solid #e6e6
 .logout-link:hover {
     text-decoration: underline;
 }
+
+/* ===== TAMBAHAN CSS UNTUK DARK MODE & NEON GLOWING ===== */
+/* Tombol toggle */
+#darkModeToggle {
+    background: transparent;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    margin-left: 10px;
+    vertical-align: middle;
+    color: #333;
+    transition: all 0.3s ease;
+}
+#darkModeToggle:hover {
+    transform: scale(1.1);
+}
+
+/* Dark mode base */
+body.dark-mode {
+    background-color: #0a0a0a !important;
+    color: #e0e0e0 !important;
+}
+
+/* Neon glow pada teks utama */
+body.dark-mode h1,
+body.dark-mode .breadcrumb a,
+body.dark-mode .logout-link {
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff;
+    transition: text-shadow 0.3s;
+}
+body.dark-mode .breadcrumb a:hover,
+body.dark-mode .logout-link:hover {
+    color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+}
+
+/* Tabel dengan border & bayangan neon */
+body.dark-mode table {
+    background: #1a1a1a;
+    border: 1px solid #00ffff;
+    box-shadow: 0 0 20px #00ffff, inset 0 0 10px #00ffff;
+}
+body.dark-mode th {
+    background: #003366;
+    color: #00ffff;
+    text-shadow: 0 0 8px #00ffff;
+}
+body.dark-mode tr:nth-child(even) {
+    background: #1f1f1f;
+}
+/* Efek glowing pada baris saat hover (cursor berada di baris) */
+body.dark-mode tr:hover td {
+    background: #003333 !important;
+    box-shadow: inset 0 0 30px #00ffff, 0 0 15px #00ffff;
+    color: #ffffff;
+    text-shadow: 0 0 10px #00ffff;
+    transition: all 0.2s ease;
+}
+body.dark-mode td,
+body.dark-mode th {
+    border-bottom: 1px solid #00ffff;
+}
+
+/* Toolbar, input, textarea, select */
+body.dark-mode .toolbar form {
+    background: #1a1a1a;
+    border-color: #00ffff;
+    box-shadow: 0 0 10px rgba(0,255,255,0.3);
+}
+body.dark-mode input[type=text],
+body.dark-mode textarea,
+body.dark-mode input[type=file],
+body.dark-mode select {
+    background: #2a2a2a;
+    color: #e0e0e0;
+    border-color: #00ffff;
+}
+body.dark-mode input[type=text]:focus,
+body.dark-mode textarea:focus {
+    box-shadow: 0 0 15px #00ffff;
+    border-color: #00ffff;
+}
+
+/* Tombol */
+body.dark-mode .button {
+    background: #003366;
+    color: #00ffff;
+    box-shadow: 0 0 15px #00ffff;
+}
+body.dark-mode .button:hover {
+    background: #0055aa;
+    box-shadow: 0 0 30px #00ffff;
+}
+
+/* Modal */
+body.dark-mode .modal {
+    background: #1a1a1a;
+    border: 2px solid #00ffff;
+    box-shadow: 0 0 40px #00ffff;
+}
+body.dark-mode .modal h3 {
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff;
+}
+body.dark-mode .modal .button {
+    background: #003366;
+    color: #00ffff;
+}
+body.dark-mode .modal .button[style*="background:#6b7280"] {
+    background: #444 !important;
+    color: #ccc;
+}
+body.dark-mode .modal .button[style*="background:#dc2626"] {
+    background: #660000 !important;
+    color: #ff6666;
+    box-shadow: 0 0 15px #ff0000;
+}
+
+/* Command output */
+body.dark-mode pre.cmdout {
+    background: #1a1a1a;
+    border-color: #00ff00;
+    color: #00ff00;
+    text-shadow: 0 0 8px #00ff00;
+    box-shadow: 0 0 20px #00ff00;
+}
+
+/* Notifikasi */
+body.dark-mode #notification {
+    background: #003300;
+    color: #00ff00;
+    box-shadow: 0 0 20px #00ff00;
+}
+
+/* Logout link */
+body.dark-mode .logout-link {
+    color: #ff00ff;
+}
+body.dark-mode .logout-link:hover {
+    color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+}
+
+/* Tombol toggle saat dark */
+body.dark-mode #darkModeToggle {
+    color: #00ffff;
+    text-shadow: 0 0 15px #00ffff;
+}
+
+/* About Me */
+body.dark-mode .about-me a {
+    color: #00ffff !important;
+    text-shadow: 0 0 10px #00ffff;
+}
+body.dark-mode .about-me a:hover {
+    color: #ff00ff !important;
+    text-shadow: 0 0 20px #ff00ff;
+}
 </style>
 </head>
 <body>
-<h1>Pernah Waras — Safe File Manager <a href="?logout" class="logout-link">Logout</a></h1>
+<h1>
+    Pernah Waras — Safe File Manager
+    <button id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
+    <a href="?logout" class="logout-link">Logout</a>
+</h1>
 <?php if ($msg) echo '<div id="notification">'.htmlspecialchars($msg).'</div>'; ?>
 <?php showBreadcrumb($curDir); ?>
 
@@ -723,11 +887,30 @@ if (modalMode) {
 document.addEventListener('keydown', function(e){
     if (e.key === 'Escape') closeAllModals();
 });
+
+// ===== TAMBAHAN JAVASCRIPT UNTUK TOGGLE DARK/LIGHT MODE =====
+(function() {
+    const toggleBtn = document.getElementById('darkModeToggle');
+    if (!toggleBtn) return;
+
+    // Cek preferensi yang tersimpan
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+        toggleBtn.textContent = '☀️';
+    }
+
+    toggleBtn.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        toggleBtn.textContent = isDark ? '☀️' : '🌙';
+        localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+    });
+})();
 </script>
 </body>
 </html>
 <!-- ABOUT ME MINIMALIS -->
-<div style="margin-top:40px;text-align:center;font-size:13px;">
+<div class="about-me" style="margin-top:40px;text-align:center;font-size:13px;">
     <p style="margin:0 0 4px;color:#111;font-weight:bold;">About Me</p>
     <a href="https://tinyurl.com/23fryr64" target="_blank" 
        style="color:#0ea5e9;text-decoration:none;font-weight:bold;transition:color 0.2s;"
