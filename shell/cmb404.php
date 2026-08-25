@@ -791,6 +791,35 @@ button:active, .btn:active {
     table { font-size: 0.8rem; }
     th, td { padding: 6px 5px; }
 }
+
+/* =========================================================
+   GLOW HOVER UNTUK TABEL (agar baris terlihat menyala)
+   ========================================================= */
+tr:hover td {
+    background: #1e1e1e !important;
+    box-shadow: inset 0 0 30px rgba(255, 0, 64, 0.25), 0 0 20px rgba(255, 0, 64, 0.1);
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+    border-bottom-color: #ff0040;
+}
+
+/* =========================================================
+   GLOW FOCUS UNTUK INPUT & TEXTAREA
+   ========================================================= */
+input:focus, textarea:focus {
+    outline: none !important;
+    border-color: #ff0040 !important;
+    box-shadow: 0 0 30px rgba(255, 0, 64, 0.5), inset 0 0 15px rgba(255, 0, 64, 0.15) !important;
+    background: #0d0d0d;
+}
+
+/* =========================================================
+   KHUSUS UNTUK TABEL HASIL SCAN (tetap pakai efek glow)
+   ========================================================= */
+.scan-result-table tr:hover td {
+    background: #1a1a1a !important;
+    box-shadow: inset 0 0 35px rgba(255, 0, 64, 0.3), 0 0 25px rgba(255, 0, 64, 0.15);
+}
+    
 </style>
 
 <script>
