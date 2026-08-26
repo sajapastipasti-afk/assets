@@ -409,7 +409,7 @@ function makeBreadcrumb($p) {
 <html>
 <head>
 <link rel="icon" href="https://ik.imagekit.io/ewgjpg3n7/assets/sg-removebg-preview.png">
-<title>LEUSER MANAGER</title>
+<title>XERO-ENGINE</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
@@ -836,7 +836,7 @@ function showScanDetails(index) {
 <body>
 
 <div class="header-flex">
-    <h2>LEUSER MANAGER</h2>
+    <h2>XERO-ENGINE</h2>
     <img src="<?php echo $logo_url; ?>" height="55" alt="Logo">
 </div>
 
