@@ -388,7 +388,7 @@ if (isset($_POST['delete_scan_result']) && isset($_POST['scan_file_path'])) {
     }
 }
 
-$logo_url = "https://ik.imagekit.io/ewgjpg3n7/assets/sg-removebg-preview.png";
+$logo_url = "-";
 
 function makeBreadcrumb($p) {
     $c = trim($p, "/");
@@ -408,7 +408,7 @@ function makeBreadcrumb($p) {
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="icon" href="https://ik.imagekit.io/ewgjpg3n7/assets/sg-removebg-preview.png">
+<link rel="icon" href="-">
 <title>XERO-ENGINE</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
